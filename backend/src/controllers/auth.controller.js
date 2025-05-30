@@ -33,6 +33,8 @@ export const login = async (req, res) => {
                 id: user._id,
                 name: user.name,
                 email: user.email,
+                username: user.username,
+                role: user.role,
             },
             token,
         });
@@ -46,7 +48,7 @@ export const login = async (req, res) => {
  * Handles user registration.
  */
 export const register = async (req, res) => {
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role, username } = req.body;
 
     try {
         // Check if user already exists
@@ -62,6 +64,7 @@ export const register = async (req, res) => {
         // Create new user
         const user = new User({
             name,
+            username,
             email,
             password: hashedPassword,
             role: role || 'user', // Default to 'user' if no role is provided
@@ -113,13 +116,4 @@ export const resetPassword = async (req, res) => {
         console.error('Password reset error:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
-};
-
-/**
- * Handles email verification.
- * TODO: Implement email verification logic.
- */
-export const verifyEmail = async (req, res) => {
-    // Implement logic if needed.
-    res.status(501).json({ message: 'Email verification not implemented yet' });
 };
