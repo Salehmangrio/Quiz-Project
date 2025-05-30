@@ -26,6 +26,10 @@ app.use('/api/',
     ]
 );
 
+app.use("*", (req, res) => {
+    res.status(404).json({ message: "Route not found" });
+});
+
 DatabaseConnection()
     .then(() => {
         app.listen(PORT, () => {
