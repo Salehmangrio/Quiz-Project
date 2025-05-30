@@ -18,8 +18,7 @@
 /backend/.vscode
 /backend/*.sublime-workspace
 /backend/*.sublime-project
-/backend/src/db
-/backend/src/models
+/backend/.env
 
 /fontend/dist
 /fontend/.DS_Store
@@ -36,3 +35,5 @@
 /fontend/.vscode
 /fontend/*.sublime-workspace
 /fontend/*.sublime-project
+.env
+/frontend/.env
