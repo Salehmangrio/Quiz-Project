@@ -1,16 +1,21 @@
-import express from 'express';
-import dotenv from 'dotenv';
 import cors from 'cors';
+import dotenv from 'dotenv';
+import express from 'express';
+import authRoutes from './routes/auth.route.js';
 import { connectDB as DatabaseConnection } from './db/db.js';
 
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 3000;
+app.use(express.json());
+const PORT = process.env.PORT;
+
 app.use(cors({
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
-app.use(express.json());
+
+
+app.use('/api/auth', authRoutes);
 
 DatabaseConnection()
     .then(() => {
