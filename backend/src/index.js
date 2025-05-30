@@ -4,6 +4,7 @@ import express from 'express';
 import authRoutes from './routes/auth.route.js';
 import { connectDB as DatabaseConnection } from './db/db.js';
 import quizRoutes from './routes/quiz.route.js';
+import questionRoutes from './routes/question.route.js';
 
 dotenv.config();
 const app = express();
@@ -19,7 +20,8 @@ app.use(cors({
 app.use('/api/',
     [
         authRoutes,
-        quizRoutes
+        quizRoutes,
+        questionRoutes
     ]
 );
 
