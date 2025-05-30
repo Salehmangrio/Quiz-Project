@@ -1,0 +1,36 @@
+# Node.js and JavaScript project .gitignore file
+# This file is used to ignore files and directories that should not be committed to the repository.
+# It is tailored for a project with both backend and frontend directories.
+
+/backend/node_modules
+/backend/dist
+/backend/.DS_Store
+/backend/*.log
+/backend/*.env.local
+/backend/*.env.development.local
+/backend/*.env.test.local
+/backend/*.env.production.local
+/backend/npm-debug.log*
+/backend/yarn-debug.log*
+/backend/yarn-error.log*
+/backend//coverage
+/backend/.idea
+/backend/.vscode
+/backend/*.sublime-workspace
+/backend/*.sublime-project
+
+/fontend/dist
+/fontend/.DS_Store
+/fontend/*.log
+/fontend/*.env.local
+/fontend/*.env.development.local
+/fontend/*.env.test.local
+/fontend/*.env.production.local
+/fontend/npm-debug.log*
+/fontend/yarn-debug.log*
+/fontend/yarn-error.log*
+/fontend//coverage
+/fontend/.idea
+/fontend/.vscode
+/fontend/*.sublime-workspace
+/fontend/*.sublime-project
