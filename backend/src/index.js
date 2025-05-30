@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import authRoutes from './routes/auth.route.js';
 import { connectDB as DatabaseConnection } from './db/db.js';
+import quizRoutes from './routes/quiz.route.js';
 
 dotenv.config();
 const app = express();
@@ -14,8 +15,13 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 
-
-app.use('/api/auth', authRoutes);
+//Routes 
+app.use('/api/',
+    [
+        authRoutes,
+        quizRoutes
+    ]
+);
 
 DatabaseConnection()
     .then(() => {
