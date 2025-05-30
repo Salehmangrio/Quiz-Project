@@ -18,6 +18,8 @@
 /backend/.vscode
 /backend/*.sublime-workspace
 /backend/*.sublime-project
+/backend/src/db
+/backend/src/models
 
 /fontend/dist
 /fontend/.DS_Store
