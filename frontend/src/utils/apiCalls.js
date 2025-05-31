@@ -49,3 +49,7 @@ export const loginUser = async (credentials) => {
     return postData('login', credentials);
 };
 
+// Register API call
+export const registerUser = async (userData) => {
+    return postData('register', userData);
+};
