@@ -17,7 +17,7 @@ const validate = (schema) => async (req, res, next) => {
  * Schema and middleware for login.
  */
 const loginSchema = yup.object().shape({
-  email: yup.string().email().required('Email is required'),
+  username: yup.string().min(3).max(20).required('Username is required'),
   password: yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
 });
 
