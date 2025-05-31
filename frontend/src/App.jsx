@@ -6,13 +6,16 @@ import {
 } from 'react-router-dom'
 import Register from './pages/auth/Register'
 import Login from './pages/auth/Login'
+import ProtectedLayout from './layouts/ProtectedLayout'
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<h1>Welcome to the App</h1>} />
-        <Route path="/about" element={<h1>About Us</h1>} />
-        <Route path="/contact" element={<h1>Contact Us</h1>} />
+        <Route element={<ProtectedLayout />}>
+          <Route path="/" element={<h1>Welcome to the App</h1>} />
+          <Route path="/about" element={<h1>About Us</h1>} />
+          <Route path="/contact" element={<h1>Contact Us</h1>} />
+        </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>
