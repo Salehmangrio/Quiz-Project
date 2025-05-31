@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     Formik,
     Form,
@@ -104,9 +104,9 @@ const Login = () => {
 
                 <p className="mt-8 text-center text-gray-600 text-sm">
                     Don't have an account?
-                    <a href="#" className="text-indigo-600 hover:underline ml-1">
+                    <Link to={`/register`} className="text-indigo-600 hover:underline ml-1">
                         Sign up
-                    </a>
+                    </Link>
                 </p>
             </div>
         </div >
