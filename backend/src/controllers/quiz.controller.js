@@ -2,13 +2,15 @@ import Quiz from '../models/quiz.model.js';
 
 export const createQuiz = async (req, res) => {
   try {
-    const { title, description, timeLimit, active } = req.body;
+    const { title, description, timeLimit, active, } = req.body;
+    const creator = req.user._id;
 
     const quiz = new Quiz({
       title,
       description,
       timeLimit,
-      active
+      active,
+      creator
     });
 
     const savedQuiz = await quiz.save();
@@ -21,6 +23,7 @@ export const createQuiz = async (req, res) => {
     res.status(500).json({ message: "Error creating quiz", error });
   }
 };
+
 
 export const getAllQuizzes = async (req, res) => {
   try {
@@ -79,5 +82,47 @@ export const deleteQuiz = async (req, res) => {
     res.status(200).json({ message: "Quiz deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting quiz", error });
+  }
+};
+
+
+export const getActiveQuizzes = async (req, res) => {
+  try {
+    const quizzes = await Quiz.find({ active: true }).populate('questions');
+    res.status(200).json(quizzes);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching active quizzes", error });
+  }
+};
+
+//want to wrtite logic to active and deactivate quizzes based on user input
+export const toggleQuizActiveStatus = async (req, res) => {
+  try {
+    const quizId = req.params.id;
+    const quiz = await Quiz.findById(quizId);
+    if (!quiz) {
+      return res.status(404).json({ message: "Quiz not found" });
+    }
+    quiz.active = !quiz.active;
+    const updatedQuiz = await quiz.save();
+    res.status(200).json({
+      message: `Quiz is now ${updatedQuiz.active ? 'active' : 'inactive'}`,
+      quiz: updatedQuiz
+    });
+  }
+  catch (error) {
+    res.status(500).json({ message: "Error toggling quiz active status", error });
+  }
+}
+
+export const getQuizzesByUser = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const quizzes = await Quiz.find({ creator: userId }).populate('questions');
+
+    res.status(200).json(quizzes);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching user's quizzes", error });
   }
 };
