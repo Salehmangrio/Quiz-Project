@@ -2,8 +2,7 @@ import Quiz from '../models/quiz.model.js';
 
 export const createQuiz = async (req, res) => {
   try {
-    const { title, description, timeLimit, active, } = req.body;
-    const creator = req.user._id;
+    const { title, description, timeLimit, active, creator } = req.body;
 
     const quiz = new Quiz({
       title,
@@ -20,6 +19,7 @@ export const createQuiz = async (req, res) => {
       quiz: savedQuiz
     });
   } catch (error) {
+    console.error("Quiz creation error:", error);
     res.status(500).json({ message: "Error creating quiz", error });
   }
 };
