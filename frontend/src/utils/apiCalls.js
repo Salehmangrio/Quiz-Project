@@ -53,3 +53,52 @@ export const loginUser = async (credentials) => {
 export const registerUser = async (userData) => {
     return postData('register', userData);
 };
+
+
+// ==================== QUIZ API CALLS ====================
+
+// Create a new quiz
+export const createQuiz = async (quizData) => {
+    return postData('quizzes', quizData);
+};
+
+// Get all quizzes
+export const getAllQuizzes = async () => {
+    return fetchData('quizzes');
+};
+
+// Get a quiz by ID
+export const getQuizById = async (quizId) => {
+    return fetchData(`quizzes/${quizId}`);
+};
+
+// Update a quiz by ID
+export const updateQuiz = async (quizId, updatedData) => {
+    return putData(`quizzes/${quizId}`, updatedData);
+};
+
+// Delete a quiz by ID
+export const deleteQuiz = async (quizId) => {
+    return deleteData(`quizzes/${quizId}`);
+};
+
+// Toggle active/inactive status of a quiz
+export const toggleQuizStatus = async (quizId) => {
+    try {
+        const response = await axios.put(`${API_BASE_URL}/quizzes/${quizId}/toggle`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+// Get all quizzes created by a specific user
+export const getQuizzesByUser = async (userId) => {
+    return fetchData(`quizzes/user/${userId}`);
+};
+
+// Get only active quizzes
+export const getActiveQuizzes = async () => {
+    return fetchData('quizzes/active');
+};
+
