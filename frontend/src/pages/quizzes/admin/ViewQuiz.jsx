@@ -1,18 +1,24 @@
 import { useEffect, useState } from 'react';
-import { getAllQuizzes, deleteQuiz, getQuizById, updateQuiz } from '../../../utils/apiCalls';
-import { useNavigate, Link } from 'react-router-dom';
+import ViewDate from '../../../components/ViewDate';
+import StyledLink from '../../../components/StyledLink';
+import {
+  deleteQuiz,
+  getQuizById,
+  updateQuiz,
+  getQuizzesByUser
+} from '../../../utils/apiCalls';
 
 const ViewQuiz = () => {
-  const [quizzes, setQuizzes] = useState([]);
-  const navigate = useNavigate();
+  const userId = JSON.parse(localStorage.getItem('user')).id;
 
-  const fetchQuizzes = async () => {
-    const data = await getAllQuizzes();
+  const [quizzes, setQuizzes] = useState([]);
+  const fetchQuizzes = async (userId) => {
+    const data = await getQuizzesByUser(userId);
     setQuizzes(data);
   };
 
   useEffect(() => {
-    fetchQuizzes();
+    fetchQuizzes(userId);
   }, []);
 
   const handleDelete = async (id) => {
@@ -26,7 +32,7 @@ const ViewQuiz = () => {
     try {
       const data = await getQuizById(id)
       await updateQuiz(data._id, { ...data, active: !data.active });
-      fetchQuizzes()
+      fetchQuizzes(userId)
     } catch (error) {
       console.log('Failed to toggle status');
     }
@@ -37,50 +43,38 @@ const ViewQuiz = () => {
       <h2 className="text-3xl font-bold mb-6 text-center">All Quizzes</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {quizzes.map((quiz) => (
-          <div key={quiz._id} className="bg-white p-5 shadow rounded-lg space-y-2 border">
-            <h3 className="text-xl font-semibold">{quiz.title}</h3>
+          <div key={quiz._id} className="bg-white p-5 shadow-[0_0_6px_1px_green] rounded-lg space-y-2 border select-none">
+            <h3 className="text-xl font-semibold capitalize text-rose-600">{quiz.title}</h3>
             <p className="text-gray-700">{quiz.description}</p>
             <p><span className="font-semibold">Questions:</span> {quiz.questions.length}</p>
             <p><span className="font-semibold">Time Limit:</span> {quiz.timeLimit} min</p>
             <p className={`font-semibold ${quiz.active ? 'text-green-600' : 'text-red-600'}`}>
               {quiz.active ? 'Active' : 'Inactive'}
             </p>
-            <div className="flex flex-wrap gap-3 mt-3">
+            <div className="flex justify-center items-center gap-3 mt-3 text-center">
+              <StyledLink to={`update/${quiz._id}`} text={'Edit'} />
               <button
-                className="px-4 py-1 text-white bg-blue-600 rounded hover:bg-blue-700"
-                onClick={() => navigate(`update/${quiz._id}`)}
-              >
-                Edit
-              </button>
-              <button
-                className="px-4 py-1 text-white bg-red-500 rounded hover:bg-red-600"
+                className="w-[250px] py-1 text-white bg-red-500 rounded-xl hover:bg-red-600"
                 onClick={() => handleDelete(quiz._id)}
               >
                 Delete
               </button>
               <button
-                className="px-4 py-1 text-white bg-purple-500 rounded hover:bg-purple-600"
+                className="w-full py-1 text-white shadow-[0_0_6px_1px_yellow] bg-emerald-500 rounded hover:bg-emerald-600"
                 onClick={() => handleToggle(quiz._id)}
               >
                 {quiz.active ? 'Deactivate' : 'Activate'}
               </button>
 
             </div>
-            <div className="flex flex-wrap items-center gap-3 mt-3">
-              <h1>Questions: </h1>
-              <button
-                className="px-4 py-1 text-white bg-emerald-500 rounded hover:bg-emerald-600"
-                onClick={() => navigate(`${quiz._id}/add-question`)}
-              >
-                Add
-              </button>
-              <Link
-                to={`${quiz._id}/view-questions`}
-                className="px-4 py-1 text-white bg-amber-500 rounded hover:bg-amber-600"
-                state={{ title: quiz.title, decription: quiz.description, time: quiz.timeLimit }}
-              >
-                View
-              </Link>
+
+            <div className="flex justify-center items-center gap-3 mt-3 text-center">
+              <StyledLink to={`${quiz._id}/add-question`} quiz={quiz} text={'AddQuestion'} />
+              <StyledLink to={`${quiz._id}/view-questions`} quiz={quiz} text={'ViewQuestion'} />
+            </div>
+            <div className='flex justify-between items-center py-2 px-1'>
+              <ViewDate title="Created on" date={quiz.createdAt} />
+              <ViewDate title="Last updated" date={quiz.updatedAt} />
             </div>
           </div>
         ))}
