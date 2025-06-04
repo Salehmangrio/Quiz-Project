@@ -9,6 +9,7 @@ import { UserHome } from './pages/home'
 import { Login, Register } from './pages/auth'
 import { UserLayout, ProtectedLayout, AdminLayout, RoleLayout, QuizLayout } from './layouts'
 import { AddQuestion, CreateQuiz, UpdateQuestion, UpdateQuiz, ViewQuestions, ViewQuiz } from './pages/quizzes/admin'
+import { ViewQuiz as ViewUserQuiz, TakeQuiz } from './pages/quizzes/user'
 
 const App = () => {
   return (
@@ -29,8 +30,9 @@ const App = () => {
               </Route>
             </Route>
 
-            <Route path='/user' element={<UserLayout />}>
-              <Route index element={<UserHome />} />
+            <Route path='/user/quiz' element={<UserLayout />}>
+              <Route index element={<ViewUserQuiz />} />
+              <Route path='take' element={<TakeQuiz />} />
             </Route>
 
           </Route >
