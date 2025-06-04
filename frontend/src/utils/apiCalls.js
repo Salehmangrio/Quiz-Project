@@ -121,3 +121,13 @@ export const deleteQuestionFromQuiz = async (quizId, questionId) => {
         throw error;
     }
 };
+
+// Update a question in a quiz
+export const updateQuestionInQuiz = async (quizId, questionId, updatedData) => {
+    return putData(`quizzes/${quizId}/questions/${questionId}`, updatedData);
+};
+
+// Get question by ID
+export const getQuestionById = async (quizId, questionId) => {
+    return fetchData(`quizzes/${quizId}/questions/${questionId}`);
+};
