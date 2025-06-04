@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { updateQuestionInQuiz, getQuestionById } from '../../../utils/apiCalls';
 
 const UpdateQuestion = () => {
   const { quizId } = useParams();
   const { id } = useLocation().state;
+  const navigate = useNavigate();
 
   const [question, setQuestion] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -71,6 +72,9 @@ const UpdateQuestion = () => {
 
       await updateQuestionInQuiz(quizId, id, updatedQuestion);
       setMessage('✅ Question updated successfully!');
+      setTimeout(() => {
+        navigate('..')
+      }, 300);
     } catch (err) {
       console.error(err);
       setError('❌ Failed to update question.');
@@ -116,6 +120,7 @@ const UpdateQuestion = () => {
           <label className="block text-sm font-medium mb-1">Options</label>
           {question.options.map((option, index) => (
             <div key={index} className="flex items-center gap-2 mb-2">
+              <span>{index}</span>
               <input
                 type="text"
                 value={option}
