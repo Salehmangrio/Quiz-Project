@@ -79,7 +79,14 @@ export const updateQuiz = async (quizId, updatedData) => {
 
 // Delete a quiz by ID
 export const deleteQuiz = async (quizId) => {
-    return deleteData(`quizzes/${quizId}`);
+    try {
+        await deleteData(`quizzes/${quizId}/questions`);
+        await deleteData(`quizzes/${quizId}`);
+        return { success: true };
+    } catch (error) {
+        console.error("Delete quiz failed:", error);
+        throw error;
+    }
 };
 
 // Get all quizzes created by a specific user
@@ -100,6 +107,6 @@ export const addQuestionToQuiz = async (quizId, questionData) => {
 };
 
 //View questions of particular Quiz
-export const viewQuestions= async (quizId)=>{
+export const viewQuestions = async (quizId) => {
     return fetchData(`quizzes/${quizId}/questions`);
 }
