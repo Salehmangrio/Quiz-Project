@@ -10,7 +10,7 @@ const RoleLayout = () => {
 
   // At root '/', redirect to role-based route
   if (location.pathname === '/') {
-    if (user.role === 'admin') return <Navigate to="/admin" replace />
+    if (user.role === 'admin') return <Navigate to="/admin/quiz" replace />
     else return <Navigate to="/user" replace />
   }
 
