@@ -24,7 +24,7 @@ const Login = () => {
             .then(response => {
                 localStorage.setItem('token', response.token);
                 localStorage.setItem('user', JSON.stringify(response.user));
-                navigate('/');
+                navigate('/', { replace: true });
             })
             .catch(error => {
                 const backendMsg = error?.response?.data?.message || 'Login failed.';
