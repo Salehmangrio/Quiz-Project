@@ -7,11 +7,12 @@ const UserLayout = () => {
     return (
         <>
             <nav className='w-full bg-gray-800 text-white p-4 flex justify-between items-center'>
-                <h1 className='text-2xl font-bold'>Welcome, {user ? user.name : 'Guest'}</h1>
-                <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
+                <h1 className='text-xl md:text-2xl font-bold'>Welcome, {user ? user.name : 'Guest'}</h1>
+                <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-1 md:py-2 px-4 rounded'
                     onClick={() => {
                         localStorage.removeItem('user')
-                        navigate('/login',{ replace: true})
+                        localStorage.removeItem('token')
+                        navigate('/login', { replace: true })
                     }}>Logout</button>
             </nav>
             <Outlet />
