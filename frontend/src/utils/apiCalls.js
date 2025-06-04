@@ -131,3 +131,8 @@ export const updateQuestionInQuiz = async (quizId, questionId, updatedData) => {
 export const getQuestionById = async (quizId, questionId) => {
     return fetchData(`quizzes/${quizId}/questions/${questionId}`);
 };
+
+// Get user by ID
+export const getUserById = async (userId) => {
+    return fetchData(`profile/${userId}`);
+};
