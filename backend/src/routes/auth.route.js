@@ -1,12 +1,10 @@
 import { Router } from 'express';
 const router = Router();
-import { login, register, logout } from '../controllers/auth.controller.js';
-import { authMiddleware } from '../middlewares/auth.middleware.js';
+import { login, register, getProfile } from '../controllers/auth.controller.js';
 import { validateLogin, validateRegister } from '../middlewares/validate.middleware.js';
 
 router.post('/login', validateLogin, login);
 router.post('/register', validateRegister, register);
-router.post('/logout', authMiddleware, logout);
-
+router.get('/profile/:id',  getProfile);
 
 export default router;
