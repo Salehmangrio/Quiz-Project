@@ -110,3 +110,14 @@ export const addQuestionToQuiz = async (quizId, questionData) => {
 export const viewQuestions = async (quizId) => {
     return fetchData(`quizzes/${quizId}/questions`);
 }
+
+// Delete a question from a quiz
+export const deleteQuestionFromQuiz = async (quizId, questionId) => {
+    try {
+        await deleteData(`quizzes/${quizId}/questions/${questionId}`);
+        return { success: true };
+    } catch (error) {
+        console.error("Delete question failed:", error);
+        throw error;
+    }
+};
