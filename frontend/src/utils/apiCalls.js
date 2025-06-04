@@ -82,16 +82,6 @@ export const deleteQuiz = async (quizId) => {
     return deleteData(`quizzes/${quizId}`);
 };
 
-// Toggle active/inactive status of a quiz
-export const toggleQuizStatus = async (quizId) => {
-    try {
-        const response = await axios.put(`${API_BASE_URL}/quizzes/${quizId}/toggle`);
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
-};
-
 // Get all quizzes created by a specific user
 export const getQuizzesByUser = async (userId) => {
     return fetchData(`quizzes/user/${userId}`);
@@ -102,3 +92,14 @@ export const getActiveQuizzes = async () => {
     return fetchData('quizzes/active');
 };
 
+// ==================== QUESTIONS API CALLS ====================
+
+//Add question to Quiz
+export const addQuestionToQuiz = async (quizId, questionData) => {
+    return postData(`quizzes/${quizId}/questions`, questionData);
+};
+
+//View questions of particular Quiz
+export const viewQuestions= async (quizId)=>{
+    return fetchData(`quizzes/${quizId}/questions`);
+}
