@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { viewQuestions } from '../../../utils/apiCalls';
+import { buttonStyles } from '../../../utils/styles';
 
 const TakeQuiz = () => {
   const location = useLocation();
@@ -74,7 +75,7 @@ const TakeQuiz = () => {
   }
 
   return (
-    <div className='container mx-auto p-6'>
+    <div className='container md:mx-auto p-6'>
       <div className="flex justify-between items-center mb-6 mt-2">
         <h1 className="text-3xl font-bold text-indigo-700">{title}</h1>
         <div className={`text-xl font-semibold px-4 py-2 rounded-lg ${timeLeft < 60 ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
@@ -118,8 +119,7 @@ const TakeQuiz = () => {
           <button
             onClick={() => handleSubmit(false)}
             disabled={quizEnded}
-            className={`px-6 py-3 rounded-lg text-white font-semibold transition 
-              ${quizEnded ? 'bg-gray-400 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700'}`}
+            className={buttonStyles}
           >
             Submit Quiz
           </button>

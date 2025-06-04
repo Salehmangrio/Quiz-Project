@@ -2,6 +2,7 @@ import React from 'react';
 import { getAllQuizzes, getUserById } from '../../../utils/apiCalls';
 import ViewDate from '../../../components/ViewDate';
 import { Link } from 'react-router-dom';
+import { buttonStyles } from '../../../utils/styles';
 
 const ViewQuiz = () => {
   const [quizzes, setQuizzes] = React.useState([]);
@@ -21,7 +22,7 @@ const ViewQuiz = () => {
   }, []);
 
   return (
-    <div className='container mx-auto p-4'>
+    <div className='container md:mx-auto p-4'>
       <h2 className="text-3xl font-bold mb-6 text-center text-indigo-700">All Quizzes</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {quizzes.map((quiz) => (
@@ -58,7 +59,7 @@ const ViewQuiz = () => {
               quiz.active && <div className="mt-4">
                 <Link
                   to={`take`}
-                  className={`w-full text-center inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-300 ${!quiz.active && 'opacity-50 cursor-not-allowed'}`}
+                  className={buttonStyles}
                   state={
                     {
                       quizId: quiz._id,

@@ -7,6 +7,7 @@ import {
   updateQuiz,
   getQuizzesByUser
 } from '../../../utils/apiCalls';
+import { buttonStyles } from '../../../utils/styles';
 
 const ViewQuiz = () => {
   const userId = JSON.parse(localStorage.getItem('user')).id;
@@ -45,7 +46,7 @@ const ViewQuiz = () => {
         {
           quizzes.length > 0 ?
             quizzes.map((quiz) => (
-              <div key={quiz._id} className="bg-white p-5 shadow-[0_0_6px_1px_green] rounded-lg space-y-2 border select-none">
+              <div key={quiz._id} className="bg-white p-5 shadow-md  rounded-lg space-y-2 border select-none">
                 <h3 className="text-xl font-semibold capitalize text-rose-600">{quiz.title}</h3>
                 <p className="text-gray-700">{quiz.description}</p>
                 <p><span className="font-semibold">Questions:</span> {quiz.questions.length}</p>
@@ -62,7 +63,7 @@ const ViewQuiz = () => {
                     Delete
                   </button>
                   <button
-                    className="w-full py-1 text-white shadow-[0_0_6px_1px_yellow] bg-emerald-500 rounded hover:bg-emerald-600"
+                    className={buttonStyles}
                     onClick={() => handleToggle(quiz._id)}
                   >
                     {quiz.active ? 'Deactivate' : 'Activate'}

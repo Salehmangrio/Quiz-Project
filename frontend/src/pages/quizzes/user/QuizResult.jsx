@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { buttonStyles } from '../../../utils/styles';
 
 const QuizResult = () => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -24,25 +25,25 @@ const QuizResult = () => {
   return (
     <div className="container mx-auto p-6">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-indigo-700 mb-2">{title} - Result</h1>
+        <h1 className="text-xl md:text-3xl font-bold text-indigo-700 mb-2">{title} - Result</h1>
         <p className="text-gray-600">Created by: <span className="font-semibold text-indigo-800">{creatorName}</span></p>
-        <p className="text-lg text-gray-600">Time Limit: {timeLimit} minute(s)</p>
-        <p className="text-lg text-gray-600">User: <span className="font-semibold text-rose-800">{user.username}</span></p>
-        <p className="text-xl mt-4 font-semibold">
+        <p className="text-md md:text-lg text-gray-600">Time Limit: {timeLimit} minute(s)</p>
+        <p className="text-md md:text-lg text-gray-600">User: <span className="font-semibold text-rose-800">{user.username}</span></p>
+        <p className="text-lg md:text-xl mt-4 font-semibold">
           Score: <span className="text-indigo-600">{correctCount} / {totalQuestions}</span> (
           <span className={`${percentage >= 60 ? 'text-green-600' : 'text-red-600'}`}>{percentage}%</span>)
         </p>
       </div>
 
       <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-800">Question Review</h2>
+        <h2 className="text-xl md:text-2xl font-semibold mb-4 text-gray-800">Question Review</h2>
         {questions.map((question, index) => {
           const userAnswer = selectedAnswers[index];
           const isCorrect = userAnswer === question.correctAnswerIndex;
 
           return (
             <div key={index} className="mb-6 border-b pb-4">
-              <h3 className="font-semibold text-lg text-indigo-700 mb-1">Q{index + 1}: {question.text}</h3>
+              <h3 className="font-semibold text-md md:text-lg text-indigo-700 mb-1">Q{index + 1}: {question.text}</h3>
               <ul className="space-y-2 mt-2">
                 {question.options.map((option, optIndex) => {
                   const isUserChoice = userAnswer === optIndex;
@@ -69,7 +70,7 @@ const QuizResult = () => {
         })}
         <div className='mt-6 text-center'>
           <p className="text-lg text-gray-600 mb-4">Thank you for participating!</p>
-          <Link className='bg-indigo-600 shadow-md py-1.5 px-6 rounded hover:bg-indigo-700 text-white' to={`/user/quiz`}>Back to Home</Link>
+          <Link className={buttonStyles} to={`/user/quiz`}>Back to Home</Link>
         </div>
       </div>
     </div>
