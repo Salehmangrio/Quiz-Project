@@ -9,7 +9,7 @@ const AdminNavbar = () => {
                 <Link to={'.'} className='text-xl font-extrabold'>{user.name}</Link></h1>
             <ul className='flex gap-4'>
                 <li>
-                    <NavLink to={'.'}>ViewQuiz</NavLink>
+                    <NavLink to={'.'}>Vi-m ewQuiz</NavLink>
                 </li>
                 <li>
                     <NavLink to={'create'}>CreateQuiz</NavLink>
