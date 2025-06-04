@@ -62,20 +62,24 @@ const ViewQuiz = () => {
                 className="px-4 py-1 text-white bg-purple-500 rounded hover:bg-purple-600"
                 onClick={() => handleToggle(quiz._id)}
               >
-                Toggle Status
+                {quiz.active ? 'Deactivate' : 'Activate'}
               </button>
+
+            </div>
+            <div className="flex flex-wrap items-center gap-3 mt-3">
+              <h1>Questions: </h1>
               <button
                 className="px-4 py-1 text-white bg-emerald-500 rounded hover:bg-emerald-600"
                 onClick={() => navigate(`${quiz._id}/add-question`)}
               >
-                Add Question
+                Add
               </button>
               <Link
                 to={`${quiz._id}/view-questions`}
                 className="px-4 py-1 text-white bg-amber-500 rounded hover:bg-amber-600"
                 state={{ title: quiz.title, decription: quiz.description, time: quiz.timeLimit }}
               >
-                View Questions
+                View
               </Link>
             </div>
           </div>
