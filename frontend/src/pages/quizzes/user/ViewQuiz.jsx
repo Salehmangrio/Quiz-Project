@@ -45,8 +45,8 @@ const ViewQuiz = () => {
             </div>
 
             <div className="mt-3 text-sm">
-              <span className={`px-3 py-1 rounded-full font-medium ${quiz.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                {quiz.isActive ? 'Active' : 'Inactive'}
+              <span className={`px-3 py-1 rounded-full font-medium ${quiz.active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                {quiz.active ? 'Active' : 'Inactive'}
               </span>
             </div>
 
@@ -54,24 +54,24 @@ const ViewQuiz = () => {
               <ViewDate title={'Created on:'} date={quiz.createdAt} />
               <ViewDate title={'Updated on:'} date={quiz.updatedAt} />
             </div>
-            <div className="mt-4">
-              <Link
-                to={`take`}
-                disabled={!quiz.isActive}
-                className={`w-full text-center inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-300 ${!quiz.isActive && 'opacity-50 cursor-not-allowed'}`}
-                state={
-                  {
-                    quizId: quiz._id,
-                    title: quiz.title,
-                    timeLimit: quiz.timeLimit,
-                    questions: quiz.questions,
-                    creatorName: quiz.creatorName
+            {
+              quiz.active && <div className="mt-4">
+                <Link
+                  to={`take`}
+                  className={`w-full text-center inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-300 ${!quiz.active && 'opacity-50 cursor-not-allowed'}`}
+                  state={
+                    {
+                      quizId: quiz._id,
+                      title: quiz.title,
+                      timeLimit: quiz.timeLimit,
+                      creatorName: quiz.creatorName
+                    }
                   }
-                }
-              >
-                Take Quiz
-              </Link>
-            </div>
+                >
+                  Take Quiz
+                </Link>
+              </div>
+            }
           </div>
         ))}
       </div>
