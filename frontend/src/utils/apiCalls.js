@@ -136,3 +136,10 @@ export const getQuestionById = async (quizId, questionId) => {
 export const getUserById = async (userId) => {
     return fetchData(`profile/${userId}`);
 };
+
+// ==================== RESULTS API CALLS ====================
+
+//send result to backend
+export const postResult = async (resultData) => {
+    return postData(`/points/submit`, resultData);
+}
