@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { viewQuestions } from '../../../utils/apiCalls';
 
 const ViewQuestions = () => {
@@ -35,13 +35,16 @@ const ViewQuestions = () => {
             <h2 className="text-xl font-bold mb-4">Questions for {title}</h2>
             <p className='mb-4 font-light'>{decription}</p>
             {questions.length === 0 ? (
-                <p>No questions found.</p>
+                <p
+                    className='flex justify-center items-center text-3xl font-extrabold h-[100%]'
+                >No questions found.</p>
             ) : (
                 <>
                     <h4 className='mb-2'>Time for Quiz: {time} mins</h4>
                     <ul className="space-y-4">
                         {questions.map((q, index) => (
                             <li key={q._id} className="border p-4 rounded">
+                                <p className="text-sm text-gray-500 mt-2 my-2">Subject: {q.subject}</p>
                                 <p className="font-semibold">{index + 1}. {q.text}</p>
                                 <ul className="list-disc ml-6 mt-2">
                                     {q.options.map((opt, i) => (
@@ -50,7 +53,16 @@ const ViewQuestions = () => {
                                         </li>
                                     ))}
                                 </ul>
-                                <p className="text-sm text-gray-500 mt-2">Subject: {q.subject}</p>
+                                <div className='flex justify-center gap-4'>
+                                    <Link
+                                        to={'..'}
+                                        className='px-4 py-1.5 my-2 text-white bg-blue-600 rounded hover:bg-blue-700'
+                                    >Edit Question</Link>
+                                    <Link
+                                        to={'..'}
+                                        className='px-4 py-1.5 my-2 text-white bg-rose-600 rounded hover:bg-rose-700'
+                                    >Delete Question</Link>
+                                </div>
                             </li>
                         ))}
                     </ul>
