@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const TakeQuiz = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { quizId, title, timeLimit, questions } = location.state || {};
 
   const [timeLeft, setTimeLeft] = useState(timeLimit * 60);
@@ -48,6 +49,9 @@ const TakeQuiz = () => {
       alert('✅ Quiz submitted successfully!');
     }
     console.table(selectedAnswers);
+    navigate('/user/quiz/result', {
+      state: { quizId, title, timeLimit, questions, selectedAnswers }
+    });
   };
 
   if (!quizId || !title || !timeLimit || !questions || !Array.isArray(questions)) {
@@ -106,7 +110,7 @@ const TakeQuiz = () => {
 
         {quizEnded && (
           <div className="mt-4 text-center text-green-600 font-semibold">
-             Quiz submitted! Thank you.
+            Quiz submitted! Thank you.
           </div>
         )}
       </div>
