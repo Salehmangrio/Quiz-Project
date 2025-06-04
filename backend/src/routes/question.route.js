@@ -13,7 +13,7 @@ router.post('/quizzes/:quizId/questions', addQuestionToQuiz);
 router.get('/quizzes/:quizId/questions', getQuestionsByQuizId);
 router.put('/quizzes/:quizId/questions/:questionId', updateQuestionInQuiz);
 router.delete('/quizzes/:quizId/questions/:questionId', deleteQuestionFromQuiz)
-router.delete('/quizzes/:quizId', deleteQuestionByQuizId)
+router.delete('/quizzes/:quizId/questions', deleteQuestionByQuizId)
 
 
 export default router;
