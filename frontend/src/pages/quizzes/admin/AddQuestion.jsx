@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { addQuestionToQuiz } from '../../../utils/apiCalls';
 
 const AddQuestion = () => {
   const { quizId } = useParams();
-
+  const navigate = useNavigate();
+  const location = useLocation();
   const [text, setText] = useState('');
   const [subject, setSubject] = useState('');
   const [options, setOptions] = useState(['', '']);
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState(0);
   const [message, setMessage] = useState('');
+  const { title, decription } = location.state;
 
   const handleOptionChange = (index, value) => {
     const newOptions = [...options];
@@ -49,6 +51,7 @@ const AddQuestion = () => {
       setSubject('');
       setOptions(['', '']);
       setCorrectAnswerIndex(0);
+      navigate(`..`);
     } catch (error) {
       setMessage('❌ Error adding question');
       console.error(error);
@@ -57,7 +60,8 @@ const AddQuestion = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6 shadow-md bg-white rounded-md">
-      <h2 className="text-xl font-bold mb-4">Add New Question</h2>
+      <h1 className="text-2xl font-bold mb-4">Add Question to Quiz: {title}</h1>
+      <p className="text-gray-600 mb-6">{decription}</p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -86,6 +90,7 @@ const AddQuestion = () => {
           <label className="block font-medium">Options</label>
           {options.map((option, index) => (
             <div key={index} className="flex items-center gap-2 mb-2">
+              <span>{index}</span>
               <input
                 type="text"
                 className="flex-1 border px-3 py-2 rounded"
@@ -138,5 +143,4 @@ const AddQuestion = () => {
     </div>
   );
 };
-
 export default AddQuestion;
