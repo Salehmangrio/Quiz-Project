@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import { viewQuestions } from '../../../utils/apiCalls';
+import { viewQuestions, deleteQuestionFromQuiz } from '../../../utils/apiCalls';
 
 const ViewQuestions = () => {
     const { quizId } = useParams();
@@ -32,7 +32,7 @@ const ViewQuestions = () => {
 
     return (
         <div className="max-w-3xl mx-auto p-6 bg-white rounded shadow">
-            <h2 className="text-xl font-bold mb-4">Questions for {title}</h2>
+            <h2 className="text-xl font-bold mb-4 capitalize">{title}</h2>
             <p className='mb-4 font-light'>{decription}</p>
             {questions.length === 0 ? (
                 <p
@@ -53,15 +53,18 @@ const ViewQuestions = () => {
                                         </li>
                                     ))}
                                 </ul>
-                                <div className='flex justify-center gap-4'>
+                                <div className='flex justify-center gap-4 pt-4'>
                                     <Link
                                         to={'..'}
                                         className='px-4 py-1.5 my-2 text-white bg-blue-600 rounded hover:bg-blue-700'
                                     >Edit Question</Link>
-                                    <Link
-                                        to={'..'}
+                                    <button
+                                        onClick={() => {
+                                            deleteQuestionFromQuiz(quizId, q._id),
+                                            setQuestions(questions.filter(question => question._id !== q._id))
+                                        }}
                                         className='px-4 py-1.5 my-2 text-white bg-rose-600 rounded hover:bg-rose-700'
-                                    >Delete Question</Link>
+                                    >Delete Question</button>
                                 </div>
                             </li>
                         ))}
