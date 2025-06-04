@@ -62,6 +62,17 @@ export const getQuestionsByQuizId = async (req, res) => {
   }
 };
 
+export const deleteQuestionByQuizId = async (req, res) => {
+  try {
+    const { quizId } = req.params;
+    // delete all questions from the database
+    await Question.deleteMany({ quiz: quizId });
+    res.status(200).json({ message: "All questions deleted successfully from quiz." });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting questions", error });
+  }
+}
+
 export const deleteQuestionFromQuiz = async (req, res) => {
   try {
     const { quizId, questionId } = req.params;
