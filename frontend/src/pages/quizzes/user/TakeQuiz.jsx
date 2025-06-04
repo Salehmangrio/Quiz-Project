@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const TakeQuiz = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { quizId, title, timeLimit, questions } = location.state || {};
+  const { quizId, title, timeLimit, questions, creatorName } = location.state || {};
 
   const [timeLeft, setTimeLeft] = useState(timeLimit * 60);
   const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -50,7 +50,7 @@ const TakeQuiz = () => {
     }
     console.table(selectedAnswers);
     navigate('/user/quiz/result', {
-      state: { quizId, title, timeLimit, questions, selectedAnswers }
+      state: { quizId, title, timeLimit, questions, selectedAnswers, creatorName }
     });
   };
 
@@ -60,13 +60,15 @@ const TakeQuiz = () => {
 
   return (
     <div className='container mx-auto p-6'>
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between items-center mb-6 mt-2">
         <h1 className="text-3xl font-bold text-indigo-700">{title}</h1>
         <div className={`text-xl font-semibold px-4 py-2 rounded-lg ${timeLeft < 60 ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
-          Time Left: {formatTime(timeLeft)}
+          Time Left: <span className="font-bold">{formatTime(timeLeft)}</span>
         </div>
       </div>
-
+      <div className="text-gray-600 mb-4">
+        <span className="font-medium text-gray-800">Created by:</span> <span className="font-semibold text-rose-800 md:text-xl">{creatorName}</span>
+      </div>
       <div className="bg-white p-6 rounded-lg shadow-md select-none capture-none">
         <h2 className="text-2xl font-semibold mb-6 text-gray-800">Questions</h2>
 

@@ -59,7 +59,13 @@ const ViewQuiz = () => {
                 to={`take`}
                 className="w-full text-center inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-300"
                 state={
-                  { quizId: quiz._id, title: quiz.title, timeLimit: quiz.timeLimit, questions: quiz.questions }
+                  {
+                    quizId: quiz._id,
+                    title: quiz.title,
+                    timeLimit: quiz.timeLimit,
+                    questions: quiz.questions,
+                    creatorName: quiz.creatorName
+                  }
                 }
               >
                 Take Quiz
