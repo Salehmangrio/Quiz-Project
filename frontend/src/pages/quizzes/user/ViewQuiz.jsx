@@ -57,7 +57,8 @@ const ViewQuiz = () => {
             <div className="mt-4">
               <Link
                 to={`take`}
-                className="w-full text-center inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-300"
+                disabled={!quiz.isActive}
+                className={`w-full text-center inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-300 ${!quiz.isActive && 'opacity-50 cursor-not-allowed'}`}
                 state={
                   {
                     quizId: quiz._id,
