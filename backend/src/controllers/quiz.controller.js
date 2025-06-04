@@ -115,14 +115,13 @@ export const toggleQuizActiveStatus = async (req, res) => {
   }
 }
 
-export const getQuizzesByUser = async (req, res) => {
+export const getQuizzesByUser =async(req,res)=>{
   try {
-    const userId = req.params.userId;
-
-    const quizzes = await Quiz.find({ creator: userId }).populate('questions');
-
-    res.status(200).json(quizzes);
+    const {userId} = req.params
+    const quiz = await Quiz.find({creator:userId}).populate('questions')
+    
+    res.status(200).json(quiz);
   } catch (error) {
-    res.status(500).json({ message: "Error fetching user's quizzes", error });
+    res.status(500).json({ message: "Error fetching quizzes", error });
   }
-};
+}
