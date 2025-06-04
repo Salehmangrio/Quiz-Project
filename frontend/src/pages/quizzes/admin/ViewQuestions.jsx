@@ -55,7 +55,8 @@ const ViewQuestions = () => {
                                 </ul>
                                 <div className='flex justify-center gap-4 pt-4'>
                                     <Link
-                                        to={'..'}
+                                        to={`edit`}
+                                        state={{ id:q._id}}
                                         className='px-4 py-1.5 my-2 text-white bg-blue-600 rounded hover:bg-blue-700'
                                     >Edit Question</Link>
                                     <button

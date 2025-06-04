@@ -8,7 +8,7 @@ import {
 import { UserHome } from './pages/home'
 import { Login, Register } from './pages/auth'
 import { UserLayout, ProtectedLayout, AdminLayout, RoleLayout, QuizLayout } from './layouts'
-import { AddQuestion, CreateQuiz, UpdateQuiz, ViewQuestions, ViewQuiz } from './pages/quizzes/admin'
+import { AddQuestion, CreateQuiz, UpdateQuestion, UpdateQuiz, ViewQuestions, ViewQuiz } from './pages/quizzes/admin'
 
 const App = () => {
   return (
@@ -25,6 +25,7 @@ const App = () => {
                 <Route path='update/:id' element={<UpdateQuiz />} />
                 <Route path=":quizId/add-question" element={<AddQuestion />} />
                 <Route path=":quizId/view-questions" element={<ViewQuestions />} />
+                <Route path=":quizId/view-questions/edit" element={<UpdateQuestion />} />
               </Route>
             </Route>
 

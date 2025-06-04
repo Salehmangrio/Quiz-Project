@@ -125,3 +125,20 @@ export const updateQuestionInQuiz = async (req, res) => {
     res.status(500).json({ message: "Error updating question", error });
   }
 };
+
+export const getQuestionById = async (req, res) => {
+  try {
+    const { quizId, questionId } = req.params;
+
+    // Fetch the question by ID
+    const question = await Question.findOne({ _id: questionId, quiz: quizId });
+    if (!question) {
+      return res.status(404).json({ message: "Question not found" });
+    }
+    res.status(200).json(question);
+  }
+  catch (error) {
+    res.status(500).json({ message: "Error fetching question", error });
+  }
+}
+
