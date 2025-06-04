@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { viewQuestions } from '../../../utils/apiCalls';
 
 const TakeQuiz = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { quizId, title, timeLimit, questions, creatorName } = location.state || {};
-
+  const { quizId, title, timeLimit, creatorName } = location.state || {};
+  const [questions, setQuestions] = useState([]);
   const [timeLeft, setTimeLeft] = useState(timeLimit * 60);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [quizEnded, setQuizEnded] = useState(false);
@@ -13,7 +14,21 @@ const TakeQuiz = () => {
   // Timer logic
   useEffect(() => {
     if (quizEnded) return;
+    const fetchQuestions = async () => {
+      try {
+        const data = await viewQuestions(quizId);
+        setQuestions(data);
+      } catch (error) {
+        console.error('Error fetching questions:', error);
+        alert('Failed to load quiz questions. Please try again later.');
+        navigate('/user/quizzes');
+      }
+    };
+    fetchQuestions();
+  }, [quizId, navigate, quizEnded]);
 
+  useEffect(() => {
+    if (quizEnded) return;
     const timer = setInterval(() => {
       setTimeLeft(prev => {
         if (prev <= 1) {
