@@ -5,10 +5,10 @@ import {
   Route
 } from 'react-router-dom'
 
-import {UserLayout,ProtectedLayout,AdminLayout,RoleLayout,QuizLayout} from './layouts'
-import {Login,Register} from './pages/auth'
-import {UserHome} from './pages/home'
-import { CreateQuiz, UpdateQuiz, ViewQuiz } from './pages/quizzes/admin'
+import { UserHome } from './pages/home'
+import { Login, Register } from './pages/auth'
+import { UserLayout, ProtectedLayout, AdminLayout, RoleLayout, QuizLayout } from './layouts'
+import { AddQuestion, CreateQuiz, UpdateQuiz, ViewQuestions, ViewQuiz } from './pages/quizzes/admin'
 
 const App = () => {
   return (
@@ -23,6 +23,8 @@ const App = () => {
                 <Route index element={<ViewQuiz />} />
                 <Route path='create' element={<CreateQuiz />} />
                 <Route path='update/:id' element={<UpdateQuiz />} />
+                <Route path=":quizId/add-question" element={<AddQuestion />} />
+                <Route path=":quizId/view-questions" element={<ViewQuestions />} />
               </Route>
             </Route>
 
