@@ -3,7 +3,6 @@ import { NavLink, Link } from 'react-router-dom'
 
 const AdminNavbar = () => {
     const user = JSON.parse(localStorage.getItem('user'))
-    console.table(user)
     return (
         <div className='h-[70px] flex justify-between items-center bg-amber-200 px-6'>
             <h1 className=' font-serif text-black capitalize'>
