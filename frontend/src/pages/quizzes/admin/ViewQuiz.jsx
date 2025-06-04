@@ -48,7 +48,7 @@ const ViewQuiz = () => {
             <div className="flex flex-wrap gap-3 mt-3">
               <button
                 className="px-4 py-1 text-white bg-blue-600 rounded hover:bg-blue-700"
-                onClick={() => navigate(`${quiz._id}/add-question`)}
+                onClick={() => navigate(`update/${quiz._id}`)}
               >
                 Edit
               </button>
