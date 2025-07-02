@@ -96,8 +96,32 @@ npm install
 npm start
 ```
 
----
-
+### 4. Depedencies used:
+ - ### FrontEnd
+ ```json
+    "dependencies": {
+        "@tailwindcss/vite": "^4.1.8",
+        "axios": "^1.9.0",
+        "formik": "^2.4.6",
+        "react": "^19.1.0",
+        "react-dom": "^19.1.0",
+        "react-router-dom": "^7.6.1",
+        "tailwindcss": "^4.1.8",
+        "yup": "^1.6.1"
+     },
+```
+- ### Backend
+```json
+"dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.15.1",
+    "yup": "^1.6.1"
+  }
+```
 ## ✅ Future Enhancements
 
 * Score analytics for users
