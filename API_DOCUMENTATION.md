@@ -14,8 +14,10 @@ Registers a new user.
 ```json
 {
   "name": "John Doe",
+  "username": "test_user",
   "email": "john@example.com",
-  "password": "123456"
+  "password": "123456",
+  "role":"admin" // admin or user
 }
 ```
 
@@ -25,7 +27,7 @@ Logs in a user.
 **Request Body:**
 ```json
 {
-  "email": "john@example.com",
+  "username": "test_user",
   "password": "123456"
 }
 ```
@@ -34,6 +36,16 @@ Logs in a user.
 
 ### POST `/quizzes`
 Creates a new quiz (Admin only).
+
+**Request Body:**
+```json
+{
+  "quiz": "javascript",
+  "description": "This quiz is made to assess knowledge of Students",
+  "timelimit":5, // min=5,
+  "status":"active"
+}
+```
 
 ### GET `/quizzes`
 Returns all quizzes.
@@ -64,6 +76,7 @@ Adds a question to a quiz.
 ```json
 {
   "questionText": "What is JSX?",
+  "subject":"React JS",
   "options": ["Library", "HTML-like syntax", "Tool", "Plugin"],
   "correctOptionIndex": 1
 }
